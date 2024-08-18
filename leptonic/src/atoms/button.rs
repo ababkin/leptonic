@@ -1,7 +1,8 @@
 use std::rc::Rc;
 
 use leptos::*;
-use leptos_router::AProps;
+use leptos_router::components::{AProps, ToHref};
+use leptos_router::location::State;
 use web_sys::FocusEvent;
 
 use crate::{
@@ -131,7 +132,7 @@ pub fn LinkButton<H>(
     exact: bool,
     /// An object of any type that will be pushed to router state
     #[prop(optional)]
-    state: Option<leptos_router::State>,
+    state: Option<State>,
     /// If `true`, the link will not add to the browser's history (so, pressing `Back`
     /// will skip this page.)
     #[prop(optional)]
@@ -142,7 +143,7 @@ pub fn LinkButton<H>(
     children: Children,
 ) -> impl IntoView
 where
-    H: leptos_router::ToHref + 'static,
+    H: ToHref + Send + Sync + 'static,
 {
     let UseButtonReturn {
         props,
@@ -193,7 +194,7 @@ where
             Some(as_dyn)
         });
 
-    leptos_router::A(AProps {
+    leptos_router::components::A(AProps {
         href,
         target: None, // TODO: Propagate this?
         exact,

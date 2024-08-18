@@ -1,5 +1,6 @@
 use leptos::*;
-use leptos_router::*;
+use leptos_router::components::*;
+use leptos_router::location::State;
 
 use crate::{hooks::*, OptMaybeSignal};
 

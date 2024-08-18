@@ -4,7 +4,8 @@ use std::{
 };
 
 use leptos::*;
-use leptos_router::{State, ToHref};
+use leptos_router::components::ToHref;
+use leptos_router::location::State;
 
 use crate::{
     atoms,
@@ -181,7 +182,7 @@ pub fn LinkButton<H>(
     children: Children,
 ) -> impl IntoView
 where
-    H: ToHref + 'static,
+    H: ToHref + Send + Sync + 'static,
 {
     attributes.push((
         "data-variant",
